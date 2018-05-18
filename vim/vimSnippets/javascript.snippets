@@ -1,0 +1,50 @@
+snippet class
+class ${0:classname} {
+	constructor(props) {
+		super(props);
+	}
+
+	render () {
+		return ;
+	}
+}
+endsnippet
+
+snippet readline
+const readline = require('readline')
+endsnippet
+
+snippet fs
+const fs = require('fs')
+endsnippet
+
+snippet path
+const path = require('path')
+endsnippet
+
+snippet prsov
+path.resolve(${0:path0}, ${1:path1})
+endsnippet
+
+snippet mongoose
+const mongoose = require('mongoose')
+mongoose.connect(${0: 'mongodb://localhost/test'})
+const db = mongoose.connection
+db.on('error', err => console.log(err))
+db.once('open', () => console.log('数据库连接成功'))
+endsnippet
+
+snippet it
+it('${1: description}', function () {
+})
+endsnippet
+
+snippet log
+console.log("$0")
+endsnippet
+
+snippet desc
+describe('$1', function () {
+	$2
+})
+endsnippet

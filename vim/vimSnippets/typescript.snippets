@@ -1,0 +1,20 @@
+snippet component
+	import { Component } from '@angular/core';
+	@Component({
+		selector: '$1',
+		templateUrl: "./`vim_snippets#Filename()`.html",
+		styleUrls: ["./`vim_snippets#Filename()`.css"],
+	})
+	export class ${1: classname} {}
+endsnippet
+
+snippet component:r
+	import { Component } from '@angular/core';
+	import { ROUTER_DIRECTIVES } from '@angular/router';
+	@Component({
+		selector: '$1',
+		templateUrl: "./`vim_snippets#Filename()`.html",
+		styleUrls: ["./`vim_snippets#Filename()`.css"],
+	})
+	export class ${1: classname} {}
+endsnippet
