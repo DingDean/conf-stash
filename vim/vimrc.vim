@@ -16,28 +16,26 @@ Plugin 'janko-m/vim-test'
 Plugin 'Shougo/neocomplete.vim'             " neocomplete使用lua，不会和Anaconda产生冲突
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'itchyny/lightline.vim'
 Plugin 'w0rp/ale'
 
 Plugin 'vimwiki/vimwiki'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'Shougo/vimproc.vim'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'ConradIrwin/vim-bracketed-paste'    " 自动set paste
 Plugin 'DingDean/vim-digitme'
 
-"语言相关插件 ->
+" "语言相关插件 ->
 
-"Stylus
+" "Stylus
 Plugin 'wavded/vim-stylus'                  "stylus语法高亮
 
-"Javascript
+" "Javascript
 Plugin 'pangloss/vim-javascript'            "JS Syntax Support
 Plugin 'mxw/vim-jsx'                        "Better Js Syntax Support
 Plugin 'heavenshell/vim-jsdoc'              "函数注释
@@ -46,40 +44,44 @@ Plugin 'ternjs/tern_for_vim'
 Plugin 'digitaltoad/vim-pug'
 Plugin 'othree/html5.vim'
 
-"Python
+" "Python
 Plugin 'hdima/python-syntax'
 Plugin 'Vimjas/vim-python-pep8-indent'
 
-"Haskell
+" "Haskell
 Plugin 'bitc/vim-hdevtools'
 Plugin 'eagletmt/ghcmod-vim'
 Plugin 'neovimhaskell/haskell-vim'
 Plugin 'alx741/vim-hindent'                  " Auto Indentation For Haskell
 
+" " glsl
+Plugin 'tikhomirov/vim-glsl'
+
+" "Go
+Plugin 'fatih/vim-go'                       " Go Development in Vim
+Plugin 'nsf/gocode'                         " Go Autocompletion
+
+" "Proto
+Plugin 'uarun/vim-protobuf'
+
+"微信小程序
+" Plugin 'chemzqm/wxapp.vim'
+
 " C++
 "Plugin 'octol/vim-cpp-enhanced-highlight'
-
-" glsl
-Plugin 'tikhomirov/vim-glsl'
 
 "LaTex
 "Plugin 'lervag/vimtex'                      " 在vim中编译和纠错LaTex文件
 "Plugin 'xuhdev/vim-latex-live-preview'      " 实时预览LaTex结果
 
-"Go
-Plugin 'fatih/vim-go'                       " Go Development in Vim
-Plugin 'nsf/gocode'                         " Go Autocompletion
-
-"Proto
-Plugin 'uarun/vim-protobuf'
-
-"微信小程序
-Plugin 'chemzqm/wxapp.vim'
-
 call vundle#end()
 filetype plugin indent on
 
 "Vim变量配置 ->
+
+syntax on
+set background=dark
+colorscheme solarized
 
 set relativenumber
 set number

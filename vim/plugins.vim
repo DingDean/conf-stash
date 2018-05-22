@@ -22,7 +22,6 @@ endfunction"}}}
 
 " NerdTree
 let NERDTreeShowLineNumber = 1
-autocmd FileType nerdtree setlocal relativenumber
 
 " UltiSnips Configuration
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -30,9 +29,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips",
       \"/Users/nagedk/myConfigureFiles/vim/vimSnippets"]
-
-" wx
-au BufRead,BufNewFile *.wpy setlocal filetype=vue.html.javascript.css
 
 " vim_jsx
 let g:jsx_ext_required = 0
@@ -71,12 +67,25 @@ endif
 nnoremap <silent> <C-p> :FZF<cr>
 
 " vim-airline
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_theme = 'solarized'
-let g:airline_solarized_bg='dark'
-let g:airline#extensions#tabline#enabled = 0
+" if !exists('g:airline_symbols')
+"   let g:airline_symbols = {}
+" endif
+" let g:airline_theme = 'solarized'
+" " let g:airline_solarized_bg='dark'
+" let g:airline#extensions#tabline#enabled = 0
+"
+" light-line
+let g:lightline = {
+      \   'colorscheme': 'solarized',
+      \   'active': {
+      \     'left': [ ['mode', 'paste'], 
+      \              ['gitbranch', 'readonly', 'filename', 'modified' ] ],
+      \   },
+      \   'component_function': {
+      \     'gitbranch': 'fugitive#head'
+      \   },
+      \   'subseparator': {'left': '>', 'right': '<'},
+      \}
 
 
 " ghc-mod
@@ -101,12 +110,6 @@ let g:haskell_backpack = 1                " to enable highlighting of backpack k
 let g:hindent_indent_size = 2
 let g:hindent_line_length = 80
 
-" solarized theme setting
-syntax enable
-set backspace=indent,eol,start
-set background=dark
-colorscheme solarized
-
 " vim-go
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -128,3 +131,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 let g:ale_linters = {'javascript': ['eslint']}
 let g:ale_fixers = {'javascript': ['eslint']}
 let g:ale_lint_on_text_changed = 'never'
+
+" NERDCommenter
+let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
