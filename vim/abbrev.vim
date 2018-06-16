@@ -35,3 +35,4 @@ iabbrev thmeselves themselves
 iabbrev Tempalte Template
 iabbrev Tempaltes Templates
 iabbrev fucnction function
+iabbrev rqeuire require
