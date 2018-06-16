@@ -66,27 +66,36 @@ endif
 "fzf
 nnoremap <silent> <C-p> :FZF<cr>
 
-" vim-airline
-" if !exists('g:airline_symbols')
-"   let g:airline_symbols = {}
-" endif
-" let g:airline_theme = 'solarized'
-" " let g:airline_solarized_bg='dark'
-" let g:airline#extensions#tabline#enabled = 0
-"
 " light-line
 let g:lightline = {
       \   'colorscheme': 'solarized',
       \   'active': {
       \     'left': [ ['mode', 'paste'], 
-      \              ['gitbranch', 'readonly', 'filename', 'modified' ] ],
+      \              ['gitbranch', 'readonly', 'filename', 'modified'] ],
+      \     'right': [ ['linter_errors', 'linter_warnings'],
+      \                [ 'lineinfo' ],
+      \                ['percent'],
+      \                ['tomato','filetype']], 
       \   },
       \   'component_function': {
-      \     'gitbranch': 'fugitive#head'
+      \     'gitbranch': 'fugitive#head',
+      \     'tomato': 'digitme#tomatoGet',
       \   },
-      \   'subseparator': {'left': '>', 'right': '<'},
       \}
 
+let g:lightline.inactive = {
+    \ 'left': [ [ 'filename' ] ],
+    \ 'right': [ [ 'lineinfo' ],
+    \            ['tomato', 'percent' ] ] }
+
+let g:lightline.component_expand = {
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \ }
+let g:lightline.component_type = {
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \ }
 
 " ghc-mod
 map <silent> tw :GhcModTypeInsert<CR>
