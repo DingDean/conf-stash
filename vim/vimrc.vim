@@ -32,6 +32,9 @@ Plugin 'DingDean/vim-digitme'
 
 " "语言相关插件 ->
 
+" apib
+Plugin 'kylef/apiblueprint.vim'
+
 " "Stylus
 Plugin 'wavded/vim-stylus'                  "stylus语法高亮
 
@@ -63,6 +66,9 @@ Plugin 'nsf/gocode'                         " Go Autocompletion
 
 " "Proto
 Plugin 'uarun/vim-protobuf'
+
+" Nginx
+Plugin 'chr4/nginx.vim'
 
 "微信小程序
 " Plugin 'chemzqm/wxapp.vim'
