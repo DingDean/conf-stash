@@ -37,3 +37,4 @@ iabbrev Tempaltes Templates
 iabbrev fucnction function
 iabbrev rqeuire require
 iabbrev probelm problem
+iabbrev resovle resolve

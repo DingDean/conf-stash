@@ -4,7 +4,7 @@ let g:tagbar_show_linenumbers = 2 " 在tags窗口左边展示相对行数
 
 " Vimwiki
 let g:vimwiki_list = [
-      \{'path': '$HOME/Projects/my-wikis/', 'syntax': 'markdown', 'ext': '.md', 'index': 'index'}
+      \{'path': '$HOME/Documents/Personal/my_wikis/', 'syntax': 'markdown', 'ext': '.md', 'index': 'index'}
       \]
 
 " Neocomplete
@@ -21,14 +21,16 @@ function! s:check_back_space() "{{{
 endfunction"}}}
 
 " NerdTree
-let NERDTreeShowLineNumber = 1
+let NERDTreeShowLineNumbers = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 " UltiSnips Configuration
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips",
-      \"/Users/nagedk/myConfigureFiles/vim/vimSnippets"]
+      \$HOME."/myConfigureFiles/vim/vimSnippets"]
 
 " vim_jsx
 let g:jsx_ext_required = 0
@@ -68,19 +70,19 @@ nnoremap <silent> <C-p> :FZF<cr>
 
 " light-line
 let g:lightline = {
-      \   'colorscheme': 'solarized',
+      \   'colorscheme': 'Tomorrow_Night',
       \   'active': {
       \     'left': [ ['mode', 'paste'], 
       \              ['gitbranch', 'readonly', 'filename', 'modified'] ],
       \     'right': [ ['linter_errors', 'linter_warnings'],
       \                [ 'lineinfo' ],
       \                ['percent'],
-      \                ['tomato','filetype']], 
+      \                ], 
       \   },
       \   'component_function': {
       \     'gitbranch': 'fugitive#head',
-      \     'tomato': 'digitme#tomatoGet',
       \   },
+      \   'subseparator': {'left': '|', 'right': '|'},
       \}
 
 let g:lightline.inactive = {
