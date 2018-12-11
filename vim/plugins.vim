@@ -24,6 +24,7 @@ endfunction"}}}
 let NERDTreeShowLineNumbers = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+autocmd Filetype nerdtree setlocal relativenumber
 
 " UltiSnips Configuration
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -116,6 +117,14 @@ let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
 let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+
+let g:haskellmode_completion_ghc = 0
+" autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+" Hdevtools
+au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
+au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsInfo<CR>
+au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsClear<CR>
+
 
 " hindent
 let g:hindent_indent_size = 2

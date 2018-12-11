@@ -17,6 +17,7 @@ Plugin 'Shougo/neocomplete.vim'             " neocomplete使用lua，不会和An
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'chriskempson/base16-vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'w0rp/ale'
 
@@ -28,7 +29,10 @@ Plugin 'suan/vim-instant-markdown'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'ConradIrwin/vim-bracketed-paste'    " 自动set paste
-Plugin 'DingDean/vim-digitme'
+" Plugin 'DingDean/vim-digitme'
+Plugin 'itchyny/vim-cursorword'
+Plugin 'Yggdroot/indentLine'
+  
 
 " "语言相关插件 ->
 
@@ -47,6 +51,9 @@ Plugin 'ternjs/tern_for_vim'
 Plugin 'digitaltoad/vim-pug'
 Plugin 'othree/html5.vim'
 
+" GraphQL
+Plugin 'jparise/vim-graphql'
+
 " "Python
 Plugin 'hdima/python-syntax'
 Plugin 'Vimjas/vim-python-pep8-indent'
@@ -54,8 +61,14 @@ Plugin 'Vimjas/vim-python-pep8-indent'
 " "Haskell
 Plugin 'bitc/vim-hdevtools'
 Plugin 'eagletmt/ghcmod-vim'
+" Plugin 'eagletmt/neco-ghc'
 Plugin 'neovimhaskell/haskell-vim'
 Plugin 'alx741/vim-hindent'                  " Auto Indentation For Haskell
+Plugin 'Shougo/vimproc.vim'
+Plugin 'pbrisbin/vim-syntax-shakespeare'
+
+" Clojure
+Plugin 'tpope/vim-fireplace'
 
 " " glsl
 Plugin 'tikhomirov/vim-glsl'
@@ -87,7 +100,7 @@ filetype plugin indent on
 
 syntax on
 set background=dark
-colorscheme solarized
+colorscheme base16-default-dark
 
 set relativenumber
 set number
