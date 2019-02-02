@@ -51,6 +51,7 @@ let g:vimwiki_list = [
 let NERDTreeShowLineNumbers = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+autocmd Filetype nerdtree setlocal relativenumber
 
 " UltiSnips Configuration
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -95,20 +96,16 @@ endif
 "fzf
 nnoremap <silent> <C-p> :FZF<cr>
 
-" vim-airline
-" if !exists('g:airline_symbols')
-"   let g:airline_symbols = {}
-" endif
-" let g:airline_theme = 'solarized'
-" " let g:airline_solarized_bg='dark'
-" let g:airline#extensions#tabline#enabled = 0
-"
 " light-line
 let g:lightline = {
       \   'colorscheme': 'Tomorrow_Night',
       \   'active': {
       \     'left': [ ['mode', 'paste'], 
-      \              ['gitbranch', 'readonly', 'filename', 'modified' ] ],
+      \              ['gitbranch', 'readonly', 'filename', 'modified'] ],
+      \     'right': [ ['linter_errors', 'linter_warnings'],
+      \                [ 'lineinfo' ],
+      \                ['percent'],
+      \                ], 
       \   },
       \   'component_function': {
       \     'gitbranch': 'fugitive#head',
@@ -116,6 +113,19 @@ let g:lightline = {
       \   'subseparator': {'left': '|', 'right': '|'},
       \}
 
+let g:lightline.inactive = {
+    \ 'left': [ [ 'filename' ] ],
+    \ 'right': [ [ 'lineinfo' ],
+    \            ['tomato', 'percent' ] ] }
+
+let g:lightline.component_expand = {
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \ }
+let g:lightline.component_type = {
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \ }
 
 " ghc-mod
 map <silent> tw :GhcModTypeInsert<CR>
@@ -134,6 +144,14 @@ let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
 let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+
+let g:haskellmode_completion_ghc = 0
+" autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+" Hdevtools
+au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
+au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsInfo<CR>
+au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsClear<CR>
+
 
 " hindent
 let g:hindent_indent_size = 2

@@ -1,0 +1,159 @@
+snippet func
+function $1 ($2) {
+	$3
+}
+endsnippet
+
+snippet =
+($1) => {$2}
+endsnippet
+
+snippet promise
+new Promise(function (resolve, reject) {$1})
+endsnippet
+
+snippet class
+class ${0:classname} {
+	constructor(props) {
+		super(props);
+	}
+
+	render () {
+		return ;
+	}
+}
+endsnippet
+
+snippet readline
+const readline = require('readline')
+endsnippet
+
+snippet fs
+const fs = require('fs')
+endsnippet
+
+snippet path
+const path = require('path')
+endsnippet
+
+snippet prsov
+path.resolve(${0:path0}, ${1:path1})
+endsnippet
+
+snippet mongoose
+const mongoose = require('mongoose')
+mongoose.connect(${0: 'mongodb://localhost/test'})
+const db = mongoose.connection
+db.on('error', err => console.log(err))
+db.once('open', () => console.log('数据库连接成功'))
+endsnippet
+
+snippet it
+it('${1: description}', function () {
+})
+endsnippet
+
+snippet log
+console.log("$0")
+endsnippet
+
+snippet desc
+describe('$1', function () {
+	$2
+})
+endsnippet
+
+snippet express-simple
+const express = require('express')
+const app = express()
+
+app.get('/', (req, res) => {
+	res.send('Hello World')
+})
+
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+	console.log(\`Server is listening on port \${PORT}\`)
+})
+endsnippet
+
+snippet express-standard
+const express = require('express')
+const compression = require('compression')
+const path = require('path')
+const fs = require('fs')
+const bodyParser = require('body-parser')
+const helmet = require('helmet')
+const app = express()
+
+require('dotenv').config()
+
+/* MongoDB */
+const mongoose = require('mongoose')
+const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/test'
+mongoose.Promise = global.Promise
+mongoose.connect(MONGO_URL, {
+  useMongoClient: true,
+  keepAlive: 120
+}).then(() => {
+  console.info('connected to database')
+}).catch(err => {
+  logger.error(err)
+  throw new Error(err)
+})
+
+/* Helmet */
+app.use(helmet())
+
+/* Setup Routes */
+app.use(compression())
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
+
+const PORT = process.env.PORT || 8889
+app.listen(PORT, () => {
+	console.log(\`Server is listening on port ${PORT}\`)
+})
+endsnippet
+
+snippet winston
+const {createLogger, format, transports} = require('winston')
+const {colorize, json, prettyPrint, combine, printf} = format
+const path = require('path')
+const logFile = path.resolve('../logs/website.log')
+
+const timestamp = format(function (info, opts) {
+	if (!info.hasOwnProperty('timestamp')) {
+		info.timestamp = new Date().toLocaleString()
+	}
+	return info
+})
+
+const myFormat = printf(info => {
+  return \`[${info.timestamp}]-[${info.level}]: ${info.message}\`
+})
+
+const logger = createLogger({
+  level: process.env.VERBOSE ? 'verbose' : 'info',
+  format: combine(
+    colorize(),
+    json(),
+    timestamp(),
+    prettyPrint(),
+    myFormat
+  ),
+  transports: [
+    new transports.Console({level: 'debug'}),
+    new transports.File({filename: logFile, level: 'info'})
+  ]
+})
+
+module.exports = logger
+endsnippet
+
+snippet ava
+test('$1', t => {
+	$2
+});
+endsnippet
+
