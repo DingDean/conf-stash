@@ -36,3 +36,4 @@ iabbrev Tempalte Template
 iabbrev Tempaltes Templates
 iabbrev fucnction function
 iabbrev resovle resolve
+iabbrev snyc sync

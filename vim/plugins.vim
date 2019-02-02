@@ -1,24 +1,51 @@
+" coc
+"" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+"" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Tab completion
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 " tagbar
 let g:tagbar_autofocus = 1
 let g:tagbar_show_linenumbers = 2 " 在tags窗口左边展示相对行数
+let g:tagbar_type_elm = {
+          \   'ctagstype':'elm'
+          \ , 'kinds':['h:header', 'i:import', 't:type', 'f:function', 'e:exposing']
+          \ , 'sro':'&&&'
+          \ , 'kind2scope':{ 'h':'header', 'i':'import'}
+          \ , 'sort':0
+          \ , 'ctagsbin':'~/myConfigureFiles/elmtags.py'
+          \ , 'ctagsargs': ''
+          \ }
 
 " Vimwiki
 let g:vimwiki_list = [
-      \{'path': '$HOME/Documents/Personal/my_wikis/', 'syntax': 'markdown', 'ext': '.md', 'index': 'index'}
+      \{'path': '$HOME/.my_wikis/tuya/', 'auto_toc': 1},
+      \{'path': '$HOME/.my_wikis/personal/', 'auto_toc': 1},
+      \{'path': '$HOME/.my_wikis/100ML/', 'auto_toc': 1},
       \]
 
-" Neocomplete
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-
-" Tab completion
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ neocomplete#start_manual_complete()
-function! s:check_back_space() "{{{
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
 
 " NerdTree
 let NERDTreeShowLineNumbers = 1
@@ -130,10 +157,37 @@ let g:tern_map_keys = 1
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " ale
-let g:ale_linters = {'javascript': ['eslint']}
+let g:ale_linters = {
+      \   'javascript': ['eslint']
+      \ }
 let g:ale_fixers = {'javascript': ['eslint']}
 let g:ale_lint_on_text_changed = 'never'
+
+" hdevtools
+" let g:hdevtools_stack = 1
+" LanguageClient-neovim
+" nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" map <Leader>lk :call LanguageClient#textDocument_hover()<CR>
+" map <Leader>lg :call LanguageClient#textDocument_definition()<CR>
+" map <Leader>lr :call LanguageClient#textDocument_rename()<CR>
+" map <Leader>lf :call LanguageClient#textDocument_formatting()<CR>
+" map <Leader>lb :call LanguageClient#textDocument_references()<CR>
+" map <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
+" map <Leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
 
 " NERDCommenter
 let g:NERDSpaceDelims = 1
 let g:NERDDefaultAlign = 'left'
+
+" dash
+let g:dash_activate = 0
+
+" presenting.vim
+au FileType vimwiki let b:presenting_slide_separator = '\v(^|\n)\~{4,}'
+
+" indentLine
+" let g:indentLine_conceallevel = 0
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+
