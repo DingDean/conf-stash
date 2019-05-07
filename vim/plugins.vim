@@ -6,6 +6,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 "" Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 function! s:show_documentation()
   if &filetype == 'vim'
@@ -98,7 +99,7 @@ nnoremap <silent> <C-p> :FZF<cr>
 
 " light-line
 let g:lightline = {
-      \   'colorscheme': 'Tomorrow_Night',
+      \   'colorscheme': 'nord',
       \   'active': {
       \     'left': [ ['mode', 'paste'], 
       \              ['gitbranch', 'readonly', 'filename', 'modified'] ],
