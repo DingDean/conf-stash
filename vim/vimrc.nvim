@@ -3,9 +3,10 @@ set nocompatible              " be iMproved, required
 call plug#begin('~/.vim/plugged')
 
 "引入功能性插件
-Plug 'VundleVim/Vundle.vim'
+" Plug 'VundleVim/Vundle.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'christoomey/vim-tmux-navigator'
@@ -13,6 +14,9 @@ Plug 'majutsushi/tagbar'
 Plug 'junegunn/vader.vim'
 Plug 'janko-m/vim-test'
 Plug 'sotte/presenting.vim'                 "presentation in vim
+Plug 'arcticicestudio/nord-vim'
+Plug 'andymass/vim-matchup'
+Plug 'SidOfc/mkdx'
 
 " Completion
 " Plugin 'Shougo/neocomplete.vim'             " neocomplete使用lua，不会和Anaconda产生冲突
@@ -31,16 +35,18 @@ Plug 'itchyny/calendar.vim'
 Plug 'w0rp/ale'
 
 Plug 'vimwiki/vimwiki'
+Plug 'machakann/vim-sandwich'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-speeddating'
+" Plug 'airblade/vim-gitgutter'
 Plug 'sodapopcan/vim-twiggy'
 Plug 'scrooloose/nerdcommenter'
 Plug 'suan/vim-instant-markdown'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'ConradIrwin/vim-bracketed-paste'    " 自动set paste
+" Plug 'ConradIrwin/vim-bracketed-paste'    " 自动set paste
 " Plug 'dhruvasagar/vim-prosession'
 Plug 'Yggdroot/indentLine'
 " Plug 'ludovicchabant/vim-gutentags'
@@ -61,7 +67,6 @@ Plug 'pangloss/vim-javascript'            "JS Syntax Support
 Plug 'mxw/vim-jsx'                        "Better Js Syntax Support
 Plug 'heavenshell/vim-jsdoc'              "函数注释
 Plug 'posva/vim-vue'
-Plug 'ternjs/tern_for_vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'othree/html5.vim'
 
@@ -70,10 +75,10 @@ Plug 'hdima/python-syntax'
 Plug 'Vimjas/vim-python-pep8-indent'
 
 " "Haskell
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
 " Plug 'bitc/vim-hdevtools'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'alx741/vim-hindent'                  " Auto Indentation For Haskell
@@ -88,7 +93,7 @@ Plug 'tpope/vim-fireplace'
 Plug 'tikhomirov/vim-glsl'
 
 " "Go
-Plug 'fatih/vim-go'                       " Go Development in Vim
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'nsf/gocode'                         " Go Autocompletion
 
 " "Proto
@@ -110,15 +115,21 @@ Plug 'cespare/vim-toml'
 " Typescript
 Plug 'leafgarland/typescript-vim'
 
+" Rust
+Plug 'rust-lang/rust.vim'
+
+" GraphQL
+Plug 'jparise/vim-graphql'
+
 call plug#end()
 filetype plugin indent on
 
 "Vim变量配置 ->
 
 syntax on
-set hidden
-set background=dark
-colorscheme base16-default-dark
+set nohidden
+" set background=dark
+colorscheme nord
 
 set relativenumber
 set number
