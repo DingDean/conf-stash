@@ -9,14 +9,17 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vader.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'majutsushi/tagbar'
-Plug 'junegunn/vader.vim'
 Plug 'janko-m/vim-test'
 Plug 'sotte/presenting.vim'                 "presentation in vim
 Plug 'arcticicestudio/nord-vim'
 Plug 'andymass/vim-matchup'
 Plug 'SidOfc/mkdx'
+Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 " Completion
 " Plugin 'Shougo/neocomplete.vim'             " neocomplete使用lua，不会和Anaconda产生冲突
@@ -43,7 +46,6 @@ Plug 'tpope/vim-speeddating'
 " Plug 'airblade/vim-gitgutter'
 Plug 'sodapopcan/vim-twiggy'
 Plug 'scrooloose/nerdcommenter'
-Plug 'suan/vim-instant-markdown'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'jiangmiao/auto-pairs'
 " Plug 'ConradIrwin/vim-bracketed-paste'    " 自动set paste
@@ -56,7 +58,8 @@ Plug 'rizzatti/dash.vim'
 Plug 'wincent/ferret'
 
 " "语言相关插件 ->
-
+" Nginx
+Plug 'chr4/nginx.vim'
 " smarty
 Plug 'blueyed/smarty.vim'
 " "Stylus
@@ -121,6 +124,18 @@ Plug 'rust-lang/rust.vim'
 " GraphQL
 Plug 'jparise/vim-graphql'
 
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    if has('nvim')
+      !cargo build --release
+    else
+      !cargo build --release --no-default-features --features json-rpc
+    endif
+  endif
+endfunction
+
+Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+
 call plug#end()
 filetype plugin indent on
 
@@ -168,6 +183,7 @@ nnoremap <leader>ep :vsplit ~/myConfigureFiles/vim/plugins.vim<cr>
 nnoremap <leader>to :TagbarOpen<cr>
 nnoremap <leader>tc :TagbarClose<cr>
 nnoremap <leader>tg :Twiggy<cr>
+nnoremap <leader>go :Goyo<cr>
 nnoremap <leader>nf :NERDTreeFind<cr>
 nnoremap <c-n> :NERDTreeToggle<cr>
 nnoremap <c-j> <c-w>j
