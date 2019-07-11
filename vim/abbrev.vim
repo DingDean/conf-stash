@@ -40,3 +40,4 @@ iabbrev probelm problem
 iabbrev resovle resolve
 iabbrev snyc sync
 iabbrev locahost localhost
+iabbrev cosnt const

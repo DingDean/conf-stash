@@ -54,6 +54,8 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+" Use <c-space> to trigger completion.
+" inoremap <silent><expr> <c-space> coc#refresh()
 
 " tagbar
 let g:tagbar_autofocus = 1
@@ -95,32 +97,6 @@ let g:jsx_ext_required = 0
 " JsDoc
 let g:jsdoc_input_description = 1 "prompt for a function description
 let g:jsdoc_allow_input_prompt = 1 "prompt for an input
-
-" vim-tmux-navigator
-if exists('$TMUX')
-  function! TmuxOrSplitSwitch(wincmd, tmuxdir)
-    let previous_winnr = winnr()
-    silent! execute "wincmd " . a:wincmd
-    if previous_winnr == winnr()
-      call system("tmux select-pane -" . a:tmuxdir)
-      redraw!
-    endif
-  endfunction
-
-  let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
-  let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
-  let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
-
-  nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
-  nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
-  nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
-  nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
-else
-  map <C-h> <C-w>h
-  map <C-j> <C-w>j
-  map <C-k> <C-w>k
-  map <C-l> <C-w>l
-endif
 
 "fzf
 nnoremap <silent> <C-p> :FZF<cr>
@@ -205,9 +181,11 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " ale
 let g:ale_linters = {
-      \   'javascript': ['eslint']
+      \   'javascript': ['eslint'],
+      \   'typescript': ['eslint'],
+      \   'cpp': [],
       \ }
-let g:ale_fixers = {'javascript': ['eslint']}
+let g:ale_fixers = {'javascript': ['eslint'], 'typescript': ['eslint'], 'vue': ['prettier']}
 let g:ale_lint_on_text_changed = 'never'
 
 " hdevtools
