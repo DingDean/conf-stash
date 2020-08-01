@@ -1,12 +1,18 @@
 "引入Vundle插件管理器配置
 set nocompatible              " be iMproved, required
+
+" 自动安装 vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 
 "引入功能性插件
-" Plug 'VundleVim/Vundle.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vader.vim'
@@ -14,57 +20,31 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'majutsushi/tagbar'
-Plug 'janko-m/vim-test'
-Plug 'sotte/presenting.vim'                 "presentation in vim
 Plug 'arcticicestudio/nord-vim'
 Plug 'andymass/vim-matchup'
-Plug 'SidOfc/mkdx'
+Plug 'previm/previm' " markdown 实时预览
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-
-" Completion
-" Plugin 'Shougo/neocomplete.vim'             " neocomplete使用lua，不会和Anaconda产生冲突
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
+Plug 'rhysd/git-messenger.vim' " commit msg under cursor
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-" endif
-" < Completion
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'altercation/vim-colors-solarized'
-Plug 'chriskempson/base16-vim'
 Plug 'itchyny/lightline.vim'
-Plug 'itchyny/calendar.vim'
 Plug 'w0rp/ale'
-
 Plug 'vimwiki/vimwiki'
 Plug 'machakann/vim-sandwich'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-obsession'
-Plug 'tpope/vim-speeddating'
-" Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 Plug 'sodapopcan/vim-twiggy'
 Plug 'scrooloose/nerdcommenter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'jiangmiao/auto-pairs'
-" Plug 'ConradIrwin/vim-bracketed-paste'    " 自动set paste
-" Plug 'dhruvasagar/vim-prosession'
 Plug 'Yggdroot/indentLine'
-" Plug 'ludovicchabant/vim-gutentags'
-" Plug 'DingDean/vim-digitme'
-" Plug 'jceb/vim-orgmode'
-Plug 'rizzatti/dash.vim'
 Plug 'wincent/ferret'
+Plug 'nvim-treesitter/nvim-treesitter'
 
 " "语言相关插件 ->
-" Nginx
-Plug 'chr4/nginx.vim'
-" smarty
-Plug 'blueyed/smarty.vim'
 " "Stylus
 Plug 'wavded/vim-stylus'                  "stylus语法高亮
-
 " "Javascript
 Plug 'pangloss/vim-javascript'            "JS Syntax Support
 Plug 'mxw/vim-jsx'                        "Better Js Syntax Support
@@ -72,86 +52,27 @@ Plug 'heavenshell/vim-jsdoc'              "函数注释
 Plug 'posva/vim-vue'
 Plug 'digitaltoad/vim-pug'
 Plug 'othree/html5.vim'
-
-" "Python
-Plug 'hdima/python-syntax'
-Plug 'Vimjas/vim-python-pep8-indent'
-
-" "Haskell
-" Plug 'autozimu/LanguageClient-neovim', {
-"     \ 'branch': 'next',
-"     \ 'do': 'bash install.sh',
-"     \ }
-" Plug 'bitc/vim-hdevtools'
-Plug 'neovimhaskell/haskell-vim'
-Plug 'alx741/vim-hindent'                  " Auto Indentation For Haskell
-
-" elm
-Plug 'ElmCast/elm-vim'
-
-" Clojure
-Plug 'tpope/vim-fireplace'
-
-" " glsl
-Plug 'tikhomirov/vim-glsl'
-
-" "Go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'nsf/gocode'                         " Go Autocompletion
-
-" "Proto
-Plug 'uarun/vim-protobuf'
-
-" Toml
-Plug 'cespare/vim-toml'
-
-"微信小程序
-" Plug 'chemzqm/wxapp.vim'
-
-" C++
-Plug 'octol/vim-cpp-enhanced-highlight'
-" Plug 'jackguo380/vim-lsp-cxx-highlight'
-Plug 'kelan/gyp.vim'
-
-"LaTex
-"Plug 'lervag/vimtex'                      " 在vim中编译和纠错LaTex文件
-"Plug 'xuhdev/vim-latex-live-preview'      " 实时预览LaTex结果
-
 " Typescript
 Plug 'leafgarland/typescript-vim'
-
+Plug 'peitalin/vim-jsx-typescript'
 " Rust
 Plug 'rust-lang/rust.vim'
-
 " GraphQL
 Plug 'jparise/vim-graphql'
-
-function! BuildComposer(info)
-  if a:info.status != 'unchanged' || a:info.force
-    if has('nvim')
-      !cargo build --release
-    else
-      !cargo build --release --no-default-features --features json-rpc
-    endif
-  endif
-endfunction
-
-Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 
 call plug#end()
 filetype plugin indent on
 
-"Vim变量配置 ->
-" if has('python')
-"   set pyx=2
-" elseif has('python3')
-"   set pyx=3
-" endif
+if &shell =~# 'fish'
+  set shell=sh
+endif
 
 syntax on
 set hidden
-" set background=dark
+set t_Co=256
+" set background=light
 colorscheme nord
+" colorscheme onehalfdark
 
 set relativenumber
 set number
@@ -163,9 +84,6 @@ set smarttab
 set softtabstop=0
 set tabstop=2
 set shiftwidth=2
-
-autocmd FileType haskell setlocal tabstop=8 shiftwidth=4
-
 set autoindent
 set smartindent
 
@@ -181,6 +99,7 @@ set incsearch
 set lazyredraw
 set showmatch
 set signcolumn=yes
+
 inoremap jk <esc>
 
 nnoremap <leader>ev :vsplit ~/.vimrc<cr>
@@ -195,17 +114,13 @@ nnoremap <leader>tc :TagbarClose<cr>
 nnoremap <leader>tg :Twiggy<cr>
 nnoremap <leader>go :Goyo<cr>
 nnoremap <leader>nf :NERDTreeFind<cr>
+nnoremap <leader>gm :GitMessager<cr>
 nnoremap <c-n> :NERDTreeToggle<cr>
-" nnoremap <c-j> <c-w>j
-" nnoremap <c-k> <c-w>k
-" nnoremap <c-h> <c-w>h
-" nnoremap <c-l> <c-w>l
-" nnoremap <c-=> <c-w>+
+nnoremap ; :
 
 " 在 vimwiki 中开关 concellevel
 autocmd FileType vimwiki nnoremap <c-o> :set conceallevel=0<cr>
 autocmd FileType vimwiki nnoremap <c-z> :set conceallevel=2<cr>
-nnoremap ; :
 
 " 自动纠错
 source $HOME/myConfigureFiles/vim/abbrev.vim

@@ -1,13 +1,16 @@
 snippet new
 <template>
-${0}
 </template>
 
-<script>
-export default {}
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator'
+
+@Component
+export default class $0 extends Vue {
+}
 </script>
 
-<style lang="stylus">
+<style lang="scss">
 </style>
 endsnippet
 
