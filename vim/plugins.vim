@@ -15,7 +15,7 @@ let g:limelight_conceal_guifg = '#777777'
 let g:limelight_default_coefficient = 0.5
 
 " Number of preceding/following paragraphs to include (default: 0)
-let g:limelight_paragraph_span = 2
+let g:limelight_paragraph_span = 5
 
 " Beginning/end of paragraph
 "   When there's no empty line between the paragraphs
@@ -75,9 +75,7 @@ let g:tagbar_type_elm = {
 " Vimwiki
 let g:vimwiki_list = [
       \{'path': '$HOME/.my_wikis/tuya/', 'auto_toc': 1, 'auto_tags': 1},
-      \{'path': '$HOME/.my_wikis/tuya2/', 'auto_toc': 1, 'ext': '.md', 'syntax': 'markdown'},
       \{'path': '$HOME/.my_wikis/personal/', 'auto_toc': 1, 'auto_tags': 1},
-      \{'path': '$HOME/.my_wikis/100ML/', 'auto_toc': 1, 'auto_tags': 1},
       \]
 let g:vimwiki_hl_headers=1
 let g:vimwiki_listsyms = '✗○◐●✓'
@@ -99,13 +97,15 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips",
 " vim_jsx
 let g:jsx_ext_required = 0
 
-" JsDoc
-let g:jsdoc_input_description = 1 "prompt for a function description
-let g:jsdoc_allow_input_prompt = 1 "prompt for an input
-
 "fzf
-nnoremap <silent> <C-p> :FZF<cr>
+nnoremap <silent> <C-p> :Files<cr>
 
+" " ripgrep
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+"   set grepprg=rg\ --vimgrep
+"   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+endif
 " light-line
 let g:lightline = {
       \   'colorscheme': 'nord',
