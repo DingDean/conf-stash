@@ -15,6 +15,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+" Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/vader.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
@@ -22,49 +23,59 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'majutsushi/tagbar'
 Plug 'arcticicestudio/nord-vim'
 Plug 'andymass/vim-matchup'
-Plug 'previm/previm' " markdown 实时预览
+" Plug 'previm/previm' " markdown 实时预览
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plug 'rhysd/git-messenger.vim' " commit msg under cursor
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-Plug 'SirVer/ultisnips'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
 Plug 'vimwiki/vimwiki'
+Plug 'michal-h21/vim-zettel'
 Plug 'machakann/vim-sandwich'
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 Plug 'sodapopcan/vim-twiggy'
 Plug 'scrooloose/nerdcommenter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Yggdroot/indentLine'
 Plug 'wincent/ferret'
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-surround'
+Plug 'gyim/vim-boxdraw'
+" Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'tmsvg/pear-tree'
 
 " "语言相关插件 ->
 " "Stylus
 Plug 'wavded/vim-stylus'                  "stylus语法高亮
 " "Javascript
-Plug 'pangloss/vim-javascript'            "JS Syntax Support
-Plug 'mxw/vim-jsx'                        "Better Js Syntax Support
+" Plug 'pangloss/vim-javascript'            "JS Syntax Support
+" " Plug 'peitalin/vim-jsx-typescript'
+" Plug 'mxw/vim-jsx'                        "Better Js Syntax Support
+" Plug 'ianks/vim-tsx'
 Plug 'heavenshell/vim-jsdoc'              "函数注释
 Plug 'posva/vim-vue'
 Plug 'digitaltoad/vim-pug'
 Plug 'othree/html5.vim'
 " Typescript
 Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+" Plug 'peitalin/vim-jsx-typescript'
 " Rust
 Plug 'rust-lang/rust.vim'
 " GraphQL
 Plug 'jparise/vim-graphql'
 
+
 call plug#end()
 filetype plugin indent on
 
 if &shell =~# 'fish'
-  set shell=sh
+  set shell=/bin/bash
+  let $SHELL = "/bin/bash"
 endif
 
 syntax on
@@ -104,6 +115,7 @@ inoremap jk <esc>
 
 nnoremap <leader>ev :vsplit ~/.vimrc<cr>
 nnoremap <leader>sv :source ~/.vimrc<cr>
+nnoremap <leader>sd :%s/\<<C-r><C-w>\>/
 nnoremap <leader>ea :vsplit ~/myConfigureFiles/vim/abbrev.vim<cr>
 nnoremap <leader>ep :vsplit ~/myConfigureFiles/vim/plugins.vim<cr>
 nnoremap <leader>pl :CocList post<cr>
@@ -114,14 +126,18 @@ nnoremap <leader>tc :TagbarClose<cr>
 nnoremap <leader>tg :Twiggy<cr>
 nnoremap <leader>go :Goyo<cr>
 nnoremap <leader>nf :NERDTreeFind<cr>
-nnoremap <leader>gm :GitMessager<cr>
+nnoremap <leader>f  :CocFix<cr>
+
 nnoremap <c-n> :NERDTreeToggle<cr>
 nnoremap ; :
 
-" 在 vimwiki 中开关 concellevel
-autocmd FileType vimwiki nnoremap <c-o> :set conceallevel=0<cr>
-autocmd FileType vimwiki nnoremap <c-z> :set conceallevel=2<cr>
+let g:python3_host_prog = '/usr/local/bin/python3'
+let g:loaded_python_provider = 0
+
+autocmd BufWritePre *.ts :Prettier
+
 
 " 自动纠错
+" source $HOME/myConfigureFiles/vim/plugin.fzf_preview.vim
 source $HOME/myConfigureFiles/vim/abbrev.vim
 source $HOME/myConfigureFiles/vim/plugins.vim
