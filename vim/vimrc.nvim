@@ -46,7 +46,6 @@ Plug 'wincent/ferret'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
-Plug 'gyim/vim-boxdraw'
 " Plug 'nvim-treesitter/nvim-treesitter'
 " Plug 'tmsvg/pear-tree'
 
@@ -73,6 +72,10 @@ Plug 'jparise/vim-graphql'
 Plug 'solarnz/thrift.vim'
 " Ruby
 Plug 'nvim-lua/plenary.nvim'
+" WGSL
+Plug '~/Projects/wgsl.vim'
+" Toml
+Plug 'cespare/vim-toml'
 
 call plug#end()
 filetype plugin indent on
@@ -117,11 +120,10 @@ set signcolumn=yes
 
 inoremap jk <esc>
 
-nnoremap <leader>ev :vsplit ~/myConfigureFiles/vim/vimrc.nvim<cr>
-nnoremap <leader>sv :source ~/myConfigureFiles/vim/vimrc.nvim<cr>
-nnoremap <leader>sd :%s/\<<C-r><C-w>\>/
-nnoremap <leader>ea :vsplit ~/myConfigureFiles/vim/abbrev.vim<cr>
-nnoremap <leader>ep :vsplit ~/myConfigureFiles/vim/plugins.vim<cr>
+nnoremap <leader>ev :vsplit ~/.config/myconf/vim/vimrc.nvim<cr>
+nnoremap <leader>sv :source ~/.config/myconf/vim/vimrc.nvim<cr>
+nnoremap <leader>ea :vsplit ~/.config/myconf/vim/abbrev.vim<cr>
+nnoremap <leader>ep :vsplit ~/.config/myconf/vim/plugins.vim<cr>
 nnoremap <leader>pl :CocList post<cr>
 nnoremap <leader>pa :CocCommand post.new<cr>
 nnoremap <leader>pd :CocCommand post.do<cr>
@@ -138,7 +140,6 @@ nnoremap <leader>hl :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") 
 nnoremap <c-n> :NERDTreeToggle<cr>
 nnoremap ; :
 
-" let g:python3_host_prog = '/usr/local/bin/python3'
 let g:loaded_python_provider = 0
 
 autocmd BufWritePre *.tsx :Prettier
@@ -147,12 +148,14 @@ autocmd FileType rust nnoremap <leader>r :Dispatch cargo run<cr>
 autocmd FileType rust nnoremap <leader>b :Dispatch cargo build<cr>
 autocmd FileType rust nnoremap <leader>bb :Dispatch cargo build --release<cr>
 autocmd FileType rust nnoremap <leader>rr :Dispatch cargo run --release<cr>
+autocmd FileType vimwiki nnoremap <c-o> :set conceallevel=0<cr>
+autocmd FileType vimwiki nnoremap <c-z> :set conceallevel=2<cr>
 
 let g:ruby_host_prog = "rbenv exec neovim-ruby-host"
 
+autocmd BufWritePre *.ts :Prettier
 
 " 自动纠错
-" source $HOME/myConfigureFiles/vim/plugin.fzf_preview.vim
-source $HOME/myConfigureFiles/vim/abbrev.vim
-source $HOME/myConfigureFiles/vim/plugins.vim
+source $HOME/.config/myconf/vim/abbrev.vim
+source $HOME/.config/myconf/vim/plugins.vim
 source $HOME/myConfigureFiles/vim/plugin.vimwiki.vim
