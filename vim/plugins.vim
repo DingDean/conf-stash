@@ -30,6 +30,7 @@ let g:limelight_priority = -1
 
 " coc
 "" Remap keys for gotos
+nmap <silent> ga :CocAction<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -75,7 +76,6 @@ let g:tagbar_type_elm = {
 " Vimwiki
 let g:vimwiki_list = [
       \{'path': '$HOME/.my_wikis/tuya/', 'auto_toc': 1, 'auto_tags': 1},
-      \{'path': '$HOME/.my_wikis/personal/', 'auto_toc': 1, 'auto_tags': 1},
       \]
 let g:vimwiki_hl_headers=1
 let g:vimwiki_listsyms = '✗○◐●✓'
@@ -98,12 +98,12 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips",
 let g:jsx_ext_required = 0
 
 "fzf
-nnoremap <silent> <C-p> :Files<cr>
+nnoremap <silent> <C-p> :FZF<cr>
 
 " " ripgrep
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-"   set grepprg=rg\ --vimgrep
+  " set grepprg=rg\ --vimgrep
 "   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 endif
 " light-line
