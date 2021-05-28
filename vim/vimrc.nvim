@@ -113,8 +113,8 @@ set signcolumn=yes
 
 inoremap jk <esc>
 
-nnoremap <leader>ev :vsplit ~/.vimrc<cr>
-nnoremap <leader>sv :source ~/.vimrc<cr>
+nnoremap <leader>ev :vsplit ~/myConfigureFiles/vim/vimrc.nvim<cr>
+nnoremap <leader>sv :source ~/myConfigureFiles/vim/vimrc.nvim<cr>
 nnoremap <leader>sd :%s/\<<C-r><C-w>\>/
 nnoremap <leader>ea :vsplit ~/myConfigureFiles/vim/abbrev.vim<cr>
 nnoremap <leader>ep :vsplit ~/myConfigureFiles/vim/plugins.vim<cr>
