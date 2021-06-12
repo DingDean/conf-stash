@@ -1,5 +1,3 @@
-" previm
-let g:previm_open_cmd = "open -a 'firefox developer edition'"
 "" limelight
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
@@ -98,11 +96,11 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips",
 let g:jsx_ext_required = 0
 
 "fzf
-nnoremap <silent> <C-p> :FZF<cr>
+nnoremap <silent> <C-p> :Files<cr>
 
 " " ripgrep
 if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*" --glob "!node_modules/*"'
   " set grepprg=rg\ --vimgrep
 "   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 endif

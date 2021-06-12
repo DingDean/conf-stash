@@ -127,6 +127,9 @@ nnoremap <leader>tg :Twiggy<cr>
 nnoremap <leader>go :Goyo<cr>
 nnoremap <leader>nf :NERDTreeFind<cr>
 nnoremap <leader>f  :CocFix<cr>
+nnoremap <leader>hl :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 nnoremap <c-n> :NERDTreeToggle<cr>
 nnoremap ; :
