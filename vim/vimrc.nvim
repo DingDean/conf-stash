@@ -45,6 +45,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'wincent/ferret'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-dispatch'
 Plug 'gyim/vim-boxdraw'
 " Plug 'nvim-treesitter/nvim-treesitter'
 " Plug 'tmsvg/pear-tree'
@@ -68,7 +69,10 @@ Plug 'leafgarland/typescript-vim'
 Plug 'rust-lang/rust.vim'
 " GraphQL
 Plug 'jparise/vim-graphql'
-
+" Thrift
+Plug 'solarnz/thrift.vim'
+" Ruby
+Plug 'nvim-lua/plenary.nvim'
 
 call plug#end()
 filetype plugin indent on
