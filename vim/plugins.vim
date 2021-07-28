@@ -71,14 +71,6 @@ let g:tagbar_type_elm = {
       \ , 'ctagsargs': ''
       \ }
 
-" Vimwiki
-let g:vimwiki_list = [
-      \{'path': '$HOME/.my_wikis/tuya/', 'auto_toc': 1, 'auto_tags': 1},
-      \]
-let g:vimwiki_hl_headers=1
-let g:vimwiki_listsyms = '✗○◐●✓'
-let g:vimwiki_global_ext = 0
-
 " NerdTree
 let NERDTreeShowLineNumbers = 1
 let NERDTreeMinimalUI = 1

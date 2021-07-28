@@ -155,3 +155,4 @@ let g:ruby_host_prog = "rbenv exec neovim-ruby-host"
 " source $HOME/myConfigureFiles/vim/plugin.fzf_preview.vim
 source $HOME/myConfigureFiles/vim/abbrev.vim
 source $HOME/myConfigureFiles/vim/plugins.vim
+source $HOME/myConfigureFiles/vim/plugin.vimwiki.vim
