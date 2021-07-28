@@ -28,7 +28,7 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plug 'rhysd/git-messenger.vim' " commit msg under cursor
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
@@ -134,10 +134,17 @@ nnoremap <leader>hl :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") 
 nnoremap <c-n> :NERDTreeToggle<cr>
 nnoremap ; :
 
-let g:python3_host_prog = '/usr/local/bin/python3'
+" let g:python3_host_prog = '/usr/local/bin/python3'
 let g:loaded_python_provider = 0
 
-autocmd BufWritePre *.ts :Prettier
+autocmd BufWritePre *.tsx :Prettier
+autocmd FileType rust nnoremap <leader>e :Dispatch cargo run --example %:t:r<cr>
+autocmd FileType rust nnoremap <leader>r :Dispatch cargo run<cr>
+autocmd FileType rust nnoremap <leader>b :Dispatch cargo build<cr>
+autocmd FileType rust nnoremap <leader>bb :Dispatch cargo build --release<cr>
+autocmd FileType rust nnoremap <leader>rr :Dispatch cargo run --release<cr>
+
+let g:ruby_host_prog = "rbenv exec neovim-ruby-host"
 
 
 " 自动纠错
