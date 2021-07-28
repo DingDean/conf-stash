@@ -120,10 +120,10 @@ set signcolumn=yes
 
 inoremap jk <esc>
 
-nnoremap <leader>ev :vsplit ~/.config/myconf/vim/vimrc.nvim<cr>
-nnoremap <leader>sv :source ~/.config/myconf/vim/vimrc.nvim<cr>
-nnoremap <leader>ea :vsplit ~/.config/myconf/vim/abbrev.vim<cr>
-nnoremap <leader>ep :vsplit ~/.config/myconf/vim/plugins.vim<cr>
+nnoremap <leader>ev :vsplit $MY_CONF_DIR/vim/vimrc.nvim<cr>
+nnoremap <leader>sv :source $MY_CONF_DIR/vim/vimrc.nvim<cr>
+nnoremap <leader>ea :vsplit $MY_CONF_DIR/vim/abbrev.vim<cr>
+nnoremap <leader>ep :vsplit $MY_CONF_DIR/vim/plugins.vim<cr>
 nnoremap <leader>pl :CocList post<cr>
 nnoremap <leader>pa :CocCommand post.new<cr>
 nnoremap <leader>pd :CocCommand post.do<cr>
@@ -156,6 +156,6 @@ let g:ruby_host_prog = "rbenv exec neovim-ruby-host"
 autocmd BufWritePre *.ts :Prettier
 
 " 自动纠错
-source $HOME/.config/myconf/vim/abbrev.vim
-source $HOME/.config/myconf/vim/plugins.vim
-source $HOME/myConfigureFiles/vim/plugin.vimwiki.vim
+source $MY_CONF_DIR/vim/abbrev.vim
+source $MY_CONF_DIR/vim/plugins.vim
+source $MY_CONF_DIR/vim/plugin.vimwiki.vim
