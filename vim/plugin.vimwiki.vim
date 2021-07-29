@@ -9,18 +9,22 @@ let base = {
       \'syntax': 'markdown',
       \}
 
-let compiler = base
-let compiler.name = 'Compiler'
-let compiler.path = '$HOME/mywiki/compiler/'
-let compiler.path_html = '$HOME/mywiki/htmls/compiler/'
+let unsorted = copy(base)
+let unsorted.name = 'unsorted'
+let unsorted.path = '$HOME/mywiki/unsorted/'
+let unsorted.path_html = '$HOME/mywiki/htmls/unsorted/'
 
-let gamedev = base
+let compilers = copy(base)
+let compilers.name = 'Compiler'
+let compilers.path = '$HOME/mywiki/compiler/'
+let compilers.path_html = '$HOME/mywiki/htmls/compiler/'
+
+let gamedev = copy(base)
 let gamedev.name = 'GameDev'
 let gamedev.path = '$HOME/mywiki/gamedev/'
 let gamedev.path_html = '$HOME/mywiki/htmls/gamedev/'
 
-
-let g:vimwiki_list = [compiler, gamedev]
+let g:vimwiki_list = [unsorted, compilers, gamedev]
 
 let g:vimwiki_hl_headers=1
 let g:vimwiki_listsyms = '✗○◐●✓'
