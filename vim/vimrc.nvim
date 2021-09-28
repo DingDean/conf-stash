@@ -46,6 +46,7 @@ Plug 'wincent/ferret'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
+Plug 'sotte/presenting.vim'
 " Plug 'nvim-treesitter/nvim-treesitter'
 " Plug 'tmsvg/pear-tree'
 
@@ -70,12 +71,17 @@ Plug 'rust-lang/rust.vim'
 Plug 'jparise/vim-graphql'
 " Thrift
 Plug 'solarnz/thrift.vim'
-" Ruby
+" Lua
 Plug 'nvim-lua/plenary.nvim'
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'lewis6991/gitsigns.nvim'
 " WGSL
-Plug '~/Projects/wgsl.vim'
+Plug '~/Projects/Personal/wgsl.vim'
 " Toml
 Plug 'cespare/vim-toml'
+" Sniprun
+Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
+Plug 'simrat39/symbols-outline.nvim'
 
 call plug#end()
 filetype plugin indent on
@@ -84,6 +90,17 @@ if &shell =~# 'fish'
   set shell=/bin/bash
   let $SHELL = "/bin/bash"
 endif
+
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+
+" Setup lua plugins
+lua require('colorizer').setup()
+lua require('gitsigns').setup({
+      \ current_line_blame = true
+      \ })
 
 syntax on
 set hidden
@@ -142,18 +159,16 @@ nnoremap ; :
 
 let g:loaded_python_provider = 0
 
-autocmd BufWritePre *.tsx :Prettier
+" autocmd BufWritePre *.tsx :Prettier
 autocmd FileType rust nnoremap <leader>e :Dispatch cargo run --example %:t:r<cr>
 autocmd FileType rust nnoremap <leader>r :Dispatch cargo run<cr>
 autocmd FileType rust nnoremap <leader>b :Dispatch cargo build<cr>
 autocmd FileType rust nnoremap <leader>bb :Dispatch cargo build --release<cr>
 autocmd FileType rust nnoremap <leader>rr :Dispatch cargo run --release<cr>
-autocmd FileType vimwiki nnoremap <c-o> :set conceallevel=0<cr>
-autocmd FileType vimwiki nnoremap <c-z> :set conceallevel=2<cr>
 
 let g:ruby_host_prog = "rbenv exec neovim-ruby-host"
 
-autocmd BufWritePre *.ts :Prettier
+" autocmd BufWritePre *.ts :Prettier
 
 " 自动纠错
 source $MY_CONF_DIR/vim/abbrev.vim
