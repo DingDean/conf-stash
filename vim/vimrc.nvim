@@ -82,6 +82,7 @@ Plug 'cespare/vim-toml'
 " Sniprun
 Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
 Plug 'simrat39/symbols-outline.nvim'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 filetype plugin indent on
