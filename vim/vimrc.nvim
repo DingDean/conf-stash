@@ -67,6 +67,7 @@ Plug 'leafgarland/typescript-vim'
 " Plug 'peitalin/vim-jsx-typescript'
 " Rust
 Plug 'rust-lang/rust.vim'
+Plug 'NoahTheDuke/vim-just' " Just command runner 
 " GraphQL
 Plug 'jparise/vim-graphql'
 " Thrift
@@ -80,9 +81,10 @@ Plug '~/Projects/Personal/wgsl.vim'
 " Toml
 Plug 'cespare/vim-toml'
 " Sniprun
-Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
+" Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
 Plug 'simrat39/symbols-outline.nvim'
 Plug 'ryanoasis/vim-devicons'
+Plug 'DingDean/wgsl.vim'
 
 call plug#end()
 filetype plugin indent on
