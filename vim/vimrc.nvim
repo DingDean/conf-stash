@@ -80,6 +80,8 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug '~/Projects/Personal/wgsl.vim'
 " Toml
 Plug 'cespare/vim-toml'
+" CPP
+Plug 'octol/vim-cpp-enhanced-highlight'
 " Sniprun
 " Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
 Plug 'simrat39/symbols-outline.nvim'
