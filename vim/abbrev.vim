@@ -41,3 +41,5 @@ iabbrev resovle resolve
 iabbrev snyc sync
 iabbrev locahost localhost
 iabbrev cosnt const
+iabbrev standart standard
+iabbrev Standart Standard

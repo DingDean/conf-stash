@@ -4,7 +4,7 @@ set nocompatible              " be iMproved, required
 " 自动安装 vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -33,24 +33,24 @@ Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
 Plug 'vimwiki/vimwiki'
-Plug 'michal-h21/vim-zettel'
-Plug 'machakann/vim-sandwich'
+"Plug 'michal-h21/vim-zettel'
+"Plug 'machakann/vim-sandwich'
 Plug 'tpope/vim-fugitive'
 " Plug 'airblade/vim-gitgutter'
-Plug 'sodapopcan/vim-twiggy'
+"Plug 'sodapopcan/vim-twiggy'
 Plug 'scrooloose/nerdcommenter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Yggdroot/indentLine'
 Plug 'wincent/ferret'
-Plug 'justinmk/vim-sneak'
+"Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
 Plug 'sotte/presenting.vim'
-" Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter'
 " Plug 'tmsvg/pear-tree'
 
-" "语言相关插件 ->
+"" "语言相关插件 ->
 " "Stylus
 Plug 'wavded/vim-stylus'                  "stylus语法高亮
 " "Javascript
@@ -85,6 +85,16 @@ Plug 'cespare/vim-toml'
 Plug 'simrat39/symbols-outline.nvim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'DingDean/wgsl.vim'
+" Golang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'sebdah/vim-delve' " go debugger delve integration
+Plug 'puremourning/vimspector'
+" 中文排版
+Plug 'hotoo/pangu.vim'
+" 数据记录
+Plug 'wakatime/vim-wakatime'
+Plug 'nvim-neorg/neorg'
+Plug 'nvim-lua/plenary.nvim'
 
 call plug#end()
 filetype plugin indent on
@@ -95,12 +105,31 @@ if &shell =~# 'fish'
 endif
 
 if (has("termguicolors"))
- set termguicolors
+  set termguicolors
 endif
 
 
 " Setup lua plugins
 lua require('colorizer').setup()
+lua require('nvim-treesitter.configs').setup({
+      \ ensure_installed = { "norg" },
+      \ highlight = {
+      \ enable = true,
+      \}
+      \})
+" lua require('neorg').setup({
+"       \load = {
+"       \["core.defaults"] = {},
+"       \["core.norg.dirman"] = {
+"         \config = {
+"           \workspaces = {
+"               \ work = "~/mywiki/norg/bytedance",
+"               \ personal = "~/mywiki/norg/personal"
+"           \}
+"         \}
+"       \}
+"       \}
+"       \})
 lua require('gitsigns').setup({
       \ current_line_blame = true
       \ })
@@ -152,10 +181,9 @@ nnoremap <leader>tc :TagbarClose<cr>
 nnoremap <leader>tg :Twiggy<cr>
 nnoremap <leader>go :Goyo<cr>
 nnoremap <leader>nf :NERDTreeFind<cr>
-nnoremap <leader>f  :CocFix<cr>
 nnoremap <leader>hl :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+      \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+      \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 nnoremap <c-n> :NERDTreeToggle<cr>
 nnoremap ; :
@@ -168,6 +196,7 @@ autocmd FileType rust nnoremap <leader>r :Dispatch cargo run<cr>
 autocmd FileType rust nnoremap <leader>b :Dispatch cargo build<cr>
 autocmd FileType rust nnoremap <leader>bb :Dispatch cargo build --release<cr>
 autocmd FileType rust nnoremap <leader>rr :Dispatch cargo run --release<cr>
+autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki call PanGuSpacing('ALL')
 
 let g:ruby_host_prog = "rbenv exec neovim-ruby-host"
 

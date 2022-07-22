@@ -14,17 +14,12 @@ let unsorted.name = 'unsorted'
 let unsorted.path = '$HOME/mywiki/unsorted/'
 let unsorted.path_html = '$HOME/mywiki/htmls/unsorted/'
 
-let compilers = copy(base)
-let compilers.name = 'Compiler'
-let compilers.path = '$HOME/mywiki/compiler/'
-let compilers.path_html = '$HOME/mywiki/htmls/compiler/'
+let bytedance = copy(base)
+let bytedance.name = 'Bytedance'
+let bytedance.path = '$HOME/mywiki/bytedance/'
+let bytedance.path_html = '$HOME/mywiki/htmls/bytedance/'
 
-let gamedev = copy(base)
-let gamedev.name = 'GameDev'
-let gamedev.path = '$HOME/mywiki/gamedev/'
-let gamedev.path_html = '$HOME/mywiki/htmls/gamedev/'
-
-let g:vimwiki_list = [unsorted, compilers, gamedev]
+let g:vimwiki_list = [unsorted, bytedance]
 
 let g:vimwiki_hl_headers=1
 let g:vimwiki_listsyms = '✗○◐●✓'

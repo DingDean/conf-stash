@@ -27,7 +27,8 @@ let g:limelight_eop = '\ze\n'
 let g:limelight_priority = -1
 
 " coc
-"" Remap keys for gotos
+"" Remap keys for gotos/fix
+nmap <silent> f  <Plug>(coc-fix-current)
 nmap <silent> ga :CocAction<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -108,7 +109,7 @@ let g:lightline = {
       \                ], 
       \   },
       \   'component_function': {
-      \     'gitbranch': 'fugitive#head',
+      \     'gitbranch': 'FugitiveHead',
       \   },
       \   'subseparator': {'left': '|', 'right': '|'},
       \}
@@ -150,7 +151,8 @@ let g:NERDDefaultAlign = 'left'
 au FileType vimwiki let b:presenting_slide_separator = '\v(^|\n)\~{4,}'
 
 " Goyo
-let g:goyo_width = 100
+let g:goyo_width = 130
+let g:goyo_width = 130
 function! s:goyo_enter()
   if executable('tmux') && strlen($TMUX)
     silent !tmux set status off
@@ -158,6 +160,8 @@ function! s:goyo_enter()
   endif
   set noshowmode
   set noshowcmd
+  set relativenumber
+  set number
   set scrolloff=999
   Limelight
   " ...
@@ -178,3 +182,8 @@ endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
+
+" vim-go
+let g:go_code_completion_enabled = 0
+" vimspector
+let g:vimspector_enable_mappings = 'HUMAN'
