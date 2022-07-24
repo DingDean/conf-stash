@@ -4,8 +4,8 @@ set nocompatible              " be iMproved, required
 " 自动安装 vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MY_CONF_DIR/vim/vimrc.nvim
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -15,16 +15,15 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-" Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
-Plug 'junegunn/vader.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-dispatch'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'majutsushi/tagbar'
 Plug 'arcticicestudio/nord-vim'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'andymass/vim-matchup'
-" Plug 'previm/previm' " markdown 实时预览
-Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plug 'rhysd/git-messenger.vim' " commit msg under cursor
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -33,51 +32,24 @@ Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
 Plug 'vimwiki/vimwiki'
-"Plug 'michal-h21/vim-zettel'
-"Plug 'machakann/vim-sandwich'
-Plug 'tpope/vim-fugitive'
-" Plug 'airblade/vim-gitgutter'
-"Plug 'sodapopcan/vim-twiggy'
 Plug 'scrooloose/nerdcommenter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Yggdroot/indentLine'
 Plug 'wincent/ferret'
-"Plug 'justinmk/vim-sneak'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-dispatch'
-Plug 'sotte/presenting.vim'
-Plug 'nvim-treesitter/nvim-treesitter'
-" Plug 'tmsvg/pear-tree'
 
-"" "语言相关插件 ->
-" "Stylus
-Plug 'wavded/vim-stylus'                  "stylus语法高亮
-" "Javascript
-" Plug 'pangloss/vim-javascript'            "JS Syntax Support
-" " Plug 'peitalin/vim-jsx-typescript'
-" Plug 'mxw/vim-jsx'                        "Better Js Syntax Support
-" Plug 'ianks/vim-tsx'
-Plug 'heavenshell/vim-jsdoc'              "函数注释
-Plug 'posva/vim-vue'
-Plug 'digitaltoad/vim-pug'
+" "语言相关插件 ->
 Plug 'othree/html5.vim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Typescript
 Plug 'leafgarland/typescript-vim'
-" Plug 'peitalin/vim-jsx-typescript'
 " Rust
 Plug 'rust-lang/rust.vim'
 Plug 'NoahTheDuke/vim-just' " Just command runner 
-" GraphQL
-Plug 'jparise/vim-graphql'
-" Thrift
-Plug 'solarnz/thrift.vim'
 " Lua
 Plug 'nvim-lua/plenary.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
-Plug 'lewis6991/gitsigns.nvim'
-" WGSL
-Plug '~/Projects/Personal/wgsl.vim'
+" Plug 'lewis6991/gitsigns.nvim'
 " Toml
 Plug 'cespare/vim-toml'
 " CPP
@@ -89,21 +61,18 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'DingDean/wgsl.vim'
 " Golang
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'sebdah/vim-delve' " go debugger delve integration
-Plug 'puremourning/vimspector'
 " 中文排版
 Plug 'hotoo/pangu.vim'
 " 数据记录
 Plug 'wakatime/vim-wakatime'
-Plug 'nvim-neorg/neorg'
 Plug 'nvim-lua/plenary.nvim'
 
 call plug#end()
 filetype plugin indent on
 
 if &shell =~# 'fish'
-  set shell=/bin/bash
-  let $SHELL = "/bin/bash"
+  set shell=/bin/zsh
+  let $SHELL = "/bin/zsh"
 endif
 
 if (has("termguicolors"))
@@ -113,25 +82,6 @@ endif
 
 " Setup lua plugins
 lua require('colorizer').setup()
-lua require('nvim-treesitter.configs').setup({
-      \ ensure_installed = { "norg" },
-      \ highlight = {
-      \ enable = true,
-      \}
-      \})
-" lua require('neorg').setup({
-"       \load = {
-"       \["core.defaults"] = {},
-"       \["core.norg.dirman"] = {
-"         \config = {
-"           \workspaces = {
-"               \ work = "~/mywiki/norg/bytedance",
-"               \ personal = "~/mywiki/norg/personal"
-"           \}
-"         \}
-"       \}
-"       \}
-"       \})
 lua require('gitsigns').setup({
       \ current_line_blame = true
       \ })
@@ -139,9 +89,10 @@ lua require('gitsigns').setup({
 syntax on
 set hidden
 set t_Co=256
-" set background=light
-colorscheme nord
-" colorscheme onehalfdark
+" colorscheme onehalflight
+colorscheme onehalfdark
+let g:onedark_terminal_italics=1
+" colorscheme nord
 
 set relativenumber
 set number
@@ -191,17 +142,15 @@ nnoremap <c-n> :NERDTreeToggle<cr>
 nnoremap ; :
 
 let g:loaded_python_provider = 0
-
-" autocmd BufWritePre *.tsx :Prettier
-autocmd FileType rust nnoremap <leader>e :Dispatch cargo run --example %:t:r<cr>
-autocmd FileType rust nnoremap <leader>r :Dispatch cargo run<cr>
-autocmd FileType rust nnoremap <leader>b :Dispatch cargo build<cr>
-autocmd FileType rust nnoremap <leader>bb :Dispatch cargo build --release<cr>
-autocmd FileType rust nnoremap <leader>rr :Dispatch cargo run --release<cr>
-autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki call PanGuSpacing('ALL')
-
 let g:ruby_host_prog = "rbenv exec neovim-ruby-host"
 
+" Bold, Strikethrough, Underline and Italic
+" if &term =~ 'xterm\|kitty\|alacritty\|tmux'
+"     let &t_Ts = "\e[9m"   " Strikethrough
+"     let &t_Te = "\e[29m"
+"     let &t_Cs = "\e[4:3m" " Undercurl
+"     let &t_Ce = "\e[4:0m"
+" endif
 " autocmd BufWritePre *.ts :Prettier
 
 " 自动纠错

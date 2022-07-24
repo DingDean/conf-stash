@@ -1,5 +1,9 @@
 " coc
-"" Remap keys for gotos/fix
+nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+
 nmap <silent> f  <Plug>(coc-fix-current)
 nmap <silent> ga :CocAction<CR>
 nmap <silent> gd <Plug>(coc-definition)
@@ -71,7 +75,7 @@ if executable('rg')
 endif
 " light-line
 let g:lightline = {
-      \   'colorscheme': 'nord',
+      \   'colorscheme': 'onehalfdark',
       \   'active': {
       \     'left': [ ['mode', 'paste'], 
       \              ['gitbranch', 'readonly', 'filename', 'modified'] ],
@@ -100,9 +104,6 @@ let g:lightline.component_type = {
       \     'linter_errors': 'error',
       \ }
 
-" vim-vue
-let g:vue_disable_pre_processors=1
-
 " editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
@@ -119,7 +120,10 @@ let g:ale_lint_on_text_changed = 'never'
 let g:NERDSpaceDelims = 1
 let g:NERDDefaultAlign = 'left'
 
-" vim-go
-let g:go_code_completion_enabled = 0
-" vimspector
-let g:vimspector_enable_mappings = 'HUMAN'
+" CPP
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+
+" Go
+let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
