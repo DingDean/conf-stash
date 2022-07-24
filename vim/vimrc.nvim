@@ -49,7 +49,7 @@ Plug 'NoahTheDuke/vim-just' " Just command runner
 " Lua
 Plug 'nvim-lua/plenary.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
-" Plug 'lewis6991/gitsigns.nvim'
+Plug 'lewis6991/gitsigns.nvim'
 " Toml
 Plug 'cespare/vim-toml'
 " CPP
@@ -78,13 +78,6 @@ endif
 if (has("termguicolors"))
   set termguicolors
 endif
-
-
-" Setup lua plugins
-lua require('colorizer').setup()
-lua require('gitsigns').setup({
-      \ current_line_blame = true
-      \ })
 
 syntax on
 set hidden
