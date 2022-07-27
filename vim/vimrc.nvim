@@ -79,10 +79,6 @@ Plug 'wincent/ferret'
 " {{{ 主题设置
   " Plug 'arcticicestudio/nord-vim'
   Plug 'sonph/onehalf', { 'rtp': 'vim' }
-  " call s:h("Pmenu", s:fg, s:cursor_line, "") " 修复在 onehalfdark 下悬浮窗口依然使用白色主题的问题
-  colorscheme onehalfdark
-  set background=dark
-  let g:onedark_terminal_italics=1
 " }}}
 
 " {{{ 界面设置
@@ -188,6 +184,9 @@ endif
 syntax on
 set hidden
 set t_Co=256
+set background=dark
+colorscheme onehalfdark
+let g:onedark_terminal_italics=1
 
 set relativenumber
 set number
