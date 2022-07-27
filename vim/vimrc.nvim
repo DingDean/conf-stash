@@ -11,25 +11,16 @@ endif
 call plug#begin('~/.vim/plugged')
 
 "引入功能性插件
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'majutsushi/tagbar'
-Plug 'arcticicestudio/nord-vim'
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'andymass/vim-matchup'
 Plug 'rhysd/git-messenger.vim' " commit msg under cursor
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
 Plug 'vimwiki/vimwiki'
 Plug 'scrooloose/nerdcommenter'
@@ -37,6 +28,121 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Yggdroot/indentLine'
 Plug 'wincent/ferret'
+
+" {{{ 搜索文件
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+  Plug 'junegunn/fzf.vim'
+  nnoremap <silent> <C-p> :Files<cr>
+  " 使用 ripgrep 来代替 grep
+  if executable('rg')
+    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*" --glob "!node_modules/*"'
+  endif
+" }}}
+
+" {{{ cocnvim
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+
+  nmap <silent> f  <Plug>(coc-fix-current)
+  nmap <silent> ga :CocAction<CR>
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+  "" Use K for show documentation in preview window
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+  command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+  function! s:show_documentation()
+    if &filetype == 'vim'
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+
+  " Tab completion
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+" }}}
+
+" {{{ 主题设置
+  " Plug 'arcticicestudio/nord-vim'
+  Plug 'sonph/onehalf', { 'rtp': 'vim' }
+  " call s:h("Pmenu", s:fg, s:cursor_line, "") " 修复在 onehalfdark 下悬浮窗口依然使用白色主题的问题
+  colorscheme onehalfdark
+  set background=dark
+  let g:onedark_terminal_italics=1
+" }}}
+
+" {{{ 界面设置
+  " 侧边文件浏览器
+  Plug 'scrooloose/nerdtree'
+  let NERDTreeShowLineNumbers = 1
+  let NERDTreeMinimalUI = 1
+  let NERDTreeDirArrows = 1
+  autocmd Filetype nerdtree setlocal relativenumber
+
+  " 状态栏
+  Plug 'itchyny/lightline.vim'
+  let g:lightline = {
+        \   'colorscheme': 'onehalfdark',
+        \   'active': {
+        \     'left': [ ['mode', 'paste'], 
+        \              ['gitbranch', 'readonly', 'filename', 'modified'] ],
+        \     'right': [ ['linter_errors', 'linter_warnings'],
+        \                [ 'lineinfo' ],
+        \                ['percent'],
+        \                ], 
+        \   },
+        \   'component_function': {
+        \     'gitbranch': 'FugitiveHead',
+        \   },
+        \   'subseparator': {'left': '|', 'right': '|'},
+        \}
+
+  let g:lightline.inactive = {
+        \ 'left': [ [ 'filename' ] ],
+        \ 'right': [ [ 'lineinfo' ],
+        \            ['tomato', 'percent' ] ] }
+
+  let g:lightline.component_expand = {
+        \  'linter_warnings': 'lightline#ale#warnings',
+        \  'linter_errors': 'lightline#ale#errors',
+        \ }
+  let g:lightline.component_type = {
+        \     'linter_warnings': 'warning',
+        \     'linter_errors': 'error',
+        \ }
+
+  Plug 'Xuyuanp/nerdtree-git-plugin'    " 在 nerdtree 里看到文件的 git 情况
+  Plug 'christoomey/vim-tmux-navigator' " 无缝切换 vim 和 tmux 的窗口 
+" }}}
+
+" {{{ 直接从 vim 执行测试代码
+  Plug 'vim-test/vim-test'
+  " 测试文件会被异步执行
+  " 测试文件会被异步执行
+  " 项目的测试会被异步执行
+  let test#strategy = {
+    \ 'nearest': 'neovim',
+    \ 'file': 'dispatch_background',
+    \ 'suite': 'dispatch_background',
+  \ }
+  nmap <silent> <leader>t :TestNearest<CR>
+  nmap <silent> <leader>tt :TestFile<CR>
+  nmap <silent> <leader>ta :TestSuite<CR>
+" }}}
 
 " "语言相关插件 ->
 Plug 'othree/html5.vim'
@@ -82,10 +188,6 @@ endif
 syntax on
 set hidden
 set t_Co=256
-" colorscheme onehalflight
-colorscheme onehalfdark
-let g:onedark_terminal_italics=1
-" colorscheme nord
 
 set relativenumber
 set number

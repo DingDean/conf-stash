@@ -1,40 +1,3 @@
-" coc
-nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-
-nmap <silent> f  <Plug>(coc-fix-current)
-nmap <silent> ga :CocAction<CR>
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-"" Use K for show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Tab completion
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-" Use <c-space> to trigger completion.
-" inoremap <silent><expr> <c-space> coc#refresh()
-
 " tagbar
 let g:tagbar_autofocus = 1
 let g:tagbar_show_linenumbers = 2 " 在tags窗口左边展示相对行数
@@ -48,12 +11,6 @@ let g:tagbar_type_elm = {
       \ , 'ctagsargs': ''
       \ }
 
-" NerdTree
-let NERDTreeShowLineNumbers = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-autocmd Filetype nerdtree setlocal relativenumber
-
 " UltiSnips Configuration
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -63,46 +20,6 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips",
 
 " vim_jsx
 let g:jsx_ext_required = 0
-
-"fzf
-nnoremap <silent> <C-p> :Files<cr>
-
-" " ripgrep
-if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*" --glob "!node_modules/*"'
-  " set grepprg=rg\ --vimgrep
-"   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-endif
-" light-line
-let g:lightline = {
-      \   'colorscheme': 'onehalfdark',
-      \   'active': {
-      \     'left': [ ['mode', 'paste'], 
-      \              ['gitbranch', 'readonly', 'filename', 'modified'] ],
-      \     'right': [ ['linter_errors', 'linter_warnings'],
-      \                [ 'lineinfo' ],
-      \                ['percent'],
-      \                ], 
-      \   },
-      \   'component_function': {
-      \     'gitbranch': 'FugitiveHead',
-      \   },
-      \   'subseparator': {'left': '|', 'right': '|'},
-      \}
-
-let g:lightline.inactive = {
-      \ 'left': [ [ 'filename' ] ],
-      \ 'right': [ [ 'lineinfo' ],
-      \            ['tomato', 'percent' ] ] }
-
-let g:lightline.component_expand = {
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \ }
-let g:lightline.component_type = {
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \ }
 
 " editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
