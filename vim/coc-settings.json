@@ -1,0 +1,14 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "rust",
+    "typescript",
+    "typescriptreact"
+  ],
+  "coc.preferences.enableMessageDialog": true,
+  "rust-analyzer.imports.group.enable": true,
+  "rust-analyzer.imports.granularity.group": "crate",
+  "rust-analyzer.procMacro.enable": true,
+  "rust-analyzer.completion.autoimport.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "suggest.floatConfig": { "border": true, "rounded": true }
+}
