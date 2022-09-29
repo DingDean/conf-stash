@@ -15,7 +15,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
 Plug 'majutsushi/tagbar'
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'andymass/vim-matchup'
 Plug 'rhysd/git-messenger.vim' " commit msg under cursor
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -81,6 +80,8 @@ Plug 'wincent/ferret'
 " {{{ 主题设置
   Plug 'arcticicestudio/nord-vim'
   Plug 'sonph/onehalf', { 'rtp': 'vim' }
+  Plug 'NLKNguyen/papercolor-theme'
+  Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 " }}}
 
 " {{{ 界面设置
@@ -94,7 +95,7 @@ Plug 'wincent/ferret'
   " 状态栏
   Plug 'itchyny/lightline.vim'
   let g:lightline = {
-        \   'colorscheme': 'onehalfdark',
+        \   'colorscheme': 'tokyonight',
         \   'active': {
         \     'left': [ ['mode', 'paste'], 
         \              ['gitbranch', 'readonly', 'filename', 'modified'] ],
@@ -187,7 +188,7 @@ syntax on
 set hidden
 set t_Co=256
 set background=dark
-colorscheme onehalfdark
+colorscheme tokyonight-moon
 let g:onedark_terminal_italics=1
 
 set relativenumber

@@ -93,5 +93,6 @@ fi
 # TODO: 使用 repgrep 替换 grep
 # TODO: 使用 bat 替换 cat
 # TODO: 使用 delta 增强 git diff
+# TODO: 字体，配色
 
 __info  "安装成功"
